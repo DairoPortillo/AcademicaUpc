@@ -1,0 +1,114 @@
+{% extends '../template_base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+<div class="card shadow mb-6">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-warning">Información de docente</h6>        
+        <a href="{% url "teacher:update_teacher" teacher.teacher_id %}" class="btn btn-warning btn-sm">Editar</a>        
+    </div>
+    <div class="card-body">
+        
+        <div class="form-group row">
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Documento de identidad</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_dni}}" disabled>                    
+            </div>
+
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Categoría</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_category_id}}" disabled>                
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Vinculación</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_linkage_id}}" disabled>                                    
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Estado </label>                    
+                <div class="custom-control custom-checkbox">
+                    {% if teacher.teacher_status %}
+                        <input type="checkbox" class="custom-control-input" checked>
+                        <label class="custom-control-label text-dark" for="id_teacher_status">Activo</label>
+                    {% else %}
+                        <input type="checkbox" class="custom-control-input">
+                        <label class="custom-control-label text-dark" for="id_teacher_status">Inactivo</label>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Primer nombre</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_name}}" disabled>                    
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Segundo nombre</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_middle_name}}" disabled>                    
+            </div>            
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Primer Apellido</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_last_name}}" disabled>                    
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0">
+                <label class="font-weight-bold text-dark">Segundo Apellido</label>
+                <input class="form-control" type="text" value="{{teacher.teacher_middle_last_name}}" disabled>                    
+            </div>
+        </div>     
+    </div>
+</div>
+<br>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-info">Resoluciones de {{teacher}}</h6>
+        <a href="{% url "resolution:create_resolution" teacher.teacher_id %}" class="btn btn-success btn-sm">Nueva resolución</a>        
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" id="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>F. Inicio</th>
+                    <th>F. Terminación</th>
+                    <th>Categoría</th>
+                    <th>Vinculación</th>
+                    <th>Valor total</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resolution in resolutions %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ resolution.resolution_start_date }}</td>
+                    <td>{{ resolution.resolution_end_date }}</td>
+                    <td>{{ resolution.resolution_category_id }}</td>
+                    <td>{{ resolution.resolution_linkage_id }}</td>
+                    <td>${{ resolution.resolution_total_teacher | intcomma}}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="popup" class="modal fade" role="dialog">
+
+</div>
+
+{% endblock %}
+
+{% block javascript_code %}
+
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    });
+</script>
+
+
+{% endblock %}

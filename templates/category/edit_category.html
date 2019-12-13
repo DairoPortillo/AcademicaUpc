@@ -1,0 +1,81 @@
+{% extends '../template_base.html' %}
+
+{% block content%}
+
+    <div class="card border-left-success shadow">
+        <div class="card-body">
+            <form action="" method="post" class="">
+                {% csrf_token %}
+                <label for="id_category_name" class="text-dark">Nombre de categoría</label>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        {{form.category_name}}
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="id_category_name">&nbsp;</label>
+                        <input type="hidden" name="">
+                        {% if form.category_name.value %}
+                            <button type="submit" class="btn btn-warning"">Actualizar categoría</button>
+                        {% else %}
+                            <button type=" submit" class="btn btn-success">Añadir categoría</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-success">Listado de categorías</h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre de Categoría</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ category.category_name }}</td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if form.errors %}
+    <div class="ui warning message">
+        <i class="close icon"></i>
+        <div class="header">
+            Por favor verifica estos campos
+        </div>
+        <ul class="list">
+            {% for error in form.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+            
+{% endblock %}
+
+{% block javascript_code %}
+
+<script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    });
+
+</script>
+
+{% endblock %}
