@@ -34,7 +34,7 @@ class Linkage(models.Model):
         return self.linkage_name 
 
 class Study(models.Model):
-    study_id = models.AutoField(primary_key=True)
+    study_id = models.CharField(max_length=50, primary_key=True)
     study_name = models.CharField(max_length=20, blank=False, null=False)
     study_percentage = models.FloatField(blank = False, null = False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,8 +44,8 @@ class Study(models.Model):
         return self.study_name
 
     def save(self, **kwargs):
-        if not self.teacher_id:     
-            self.teacher_id = hashlib.md5((self.study_name + str(time.time())).encode()).hexdigest()
+        if not self.study_id:     
+            self.study_id = hashlib.md5((self.study_name + str(time.time())).encode()).hexdigest()
         super().save(**kwargs)
 
 class Teacher(models.Model):
