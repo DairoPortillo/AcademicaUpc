@@ -14,8 +14,16 @@
                         <label class="font-weight-bold text-dark">Documento de identidad</label>
                         {{form.teacher_dni}}
                     </div>
-                    
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                        <label class="font-weight-bold text-dark">Estado </label>
+                        <div class="custom-control custom-checkbox">
+                            
+                            {{form.teacher_status}}
+                            <label class="custom-control-label text-dark" for="id_teacher_status">Activo</label>
+                        </div>                                                 
+                    </div>                    
                 </div>
+
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label class="font-weight-bold text-dark">Primer nombre</label>
@@ -45,21 +53,20 @@
                     </div>
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label class="font-weight-bold text-dark">Vinculación</label>
-                        {{form.teacher_linkage_id}}       
-                        
+                        {{form.teacher_linkage_id}}                               
                     </div>
                     <div class="col-sm-4 mb-3 mb-sm-0">
-                        <label class="font-weight-bold text-dark">Estado </label>
-                        <div class="custom-control custom-checkbox">
-                            
-                            {{form.teacher_status}}
-                            <label class="custom-control-label text-dark" for="id_teacher_status">Activo</label>
-                        </div>                                                 
+                        <label class="font-weight-bold text-dark">Nivel de estudio maximo </label>                        
+                            {{form.teacher_study_id}}                                                
                     </div>
                 </div>
                 <div class="form-group row">                    
-                    <div class="col">
-                        <button type="submit" class="btn btn-success btn-block">Registrar</button>
+                    <div class="col">                    
+                        {% if form.teacher_dni.value %}
+                            <button type="submit" class="btn btn-success btn-block">Actualizar docente</button>
+                        {% else %}
+                            <button type=" submit" class="btn btn-success btn-block">Registrar</button>
+                        {% endif %}
                     </div>
                     
                 </div>

@@ -12,7 +12,11 @@ class CreateTeacher(CreateView):
     model = Teacher
     form_class = TeacherForm
     template_name = 'teacher/edit_teacher.html'
-    success_url = reverse_lazy('teacher:update_teacher')
+    #success_url = reverse_lazy('teacher:update_teacher')
+    
+    def get_success_url(self):
+        return reverse('teacher:update_teacher', kwargs={'pk': self.object.teacher_id})   
+    
 
 class UpdateTeacher(UpdateView):
     model = Teacher
@@ -20,7 +24,7 @@ class UpdateTeacher(UpdateView):
     template_name = 'teacher/edit_teacher.html'
     #success_url = reverse_lazy('teacher:create_teacher')
     
-
+    
     """
     @method_decorator(permission_required('teacher.update_teacher'), reverse_lazy('teacher:create_teacher'))
     def dispatch(self, *args, **kwargs):

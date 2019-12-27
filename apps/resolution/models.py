@@ -1,5 +1,5 @@
 from django.db import models
-from apps.teacher.models import Teacher, Category, Linkage
+from apps.teacher.models import Teacher, Category, Linkage, Study
 import hashlib
 import time
 
@@ -34,6 +34,7 @@ class Resolution(models.Model):
     resolution_teacher_id = models.ForeignKey(Teacher, on_delete = models.PROTECT)
     resolution_category_id = models.ForeignKey(Category, on_delete = models.PROTECT)
     resolution_linkage_id = models.ForeignKey(Linkage, on_delete = models.PROTECT)
+    resolution_study_id = models.ForeignKey(Study, on_delete = models.PROTECT)
     resolution_start_date = models.DateField(blank = False, null = False)
     resolution_end_date = models.DateField(blank = False, null = False)
     resolution_hours = models.IntegerField(blank = False, null = False)

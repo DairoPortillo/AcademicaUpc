@@ -4,7 +4,7 @@ from .models import Resolution
 class ResolutionForm(forms.ModelForm):
     class Meta:
         model = Resolution
-        fields = ['resolution_teacher_id', 'resolution_category_id', 'resolution_linkage_id', 'resolution_start_date', 'resolution_end_date', 'resolution_hours', 'resolution_total_qualification', 'resolution_total_seedbed', 'resolution_total_group', 'resolution_total_teacher']
+        fields = ['resolution_teacher_id', 'resolution_category_id', 'resolution_linkage_id', 'resolution_study_id', 'resolution_start_date', 'resolution_end_date', 'resolution_hours', 'resolution_total_qualification', 'resolution_total_seedbed', 'resolution_total_group', 'resolution_total_teacher']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

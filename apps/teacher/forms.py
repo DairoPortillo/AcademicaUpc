@@ -4,7 +4,7 @@ from .models import Teacher, Category
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ['teacher_dni', 'teacher_name', 'teacher_middle_name', 'teacher_last_name', 'teacher_middle_last_name', 'teacher_category_id', 'teacher_linkage_id', 'teacher_status']
+        fields = ['teacher_dni', 'teacher_name', 'teacher_middle_name', 'teacher_last_name', 'teacher_middle_last_name', 'teacher_category_id', 'teacher_linkage_id', 'teacher_study_id' ,'teacher_status']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
